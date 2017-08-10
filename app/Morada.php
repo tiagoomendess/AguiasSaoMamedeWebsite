@@ -8,3 +8,4 @@ class Morada extends Model
 {
     protected $fillable = ['rua', 'numero', 'codigo_postal', 'localidade', 'cidade', 'pais'];
 }
+

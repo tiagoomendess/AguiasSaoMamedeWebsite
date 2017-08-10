@@ -22,10 +22,11 @@ Route::group(['prefix' => 'painel', 'middleware' => 'admin'], function () {
         return view('painel.inicio');
     })->name('painel');
 
-    Route::get('/socio/show/{id}', 'Resources\SocioController@show')->name('showSocio');
+    Route::get('/socio/{socio}/show', 'Resources\SocioController@show')->name('showSocio');
     Route::get('/socios', 'Resources\SocioController@index')->name('socios');
     Route::get('/socios/atrasados', 'Resources\SocioController@sociosAtrasados')->name('sociosAtrasados');
     Route::get('/socio/create', 'Resources\SocioController@create')->name('createSocio');
+    Route::post('/socio/store', 'Resources\SocioController@store')->name('storeSocio');
     Route::get('/socio/{socio}/edit', 'Resources\SocioController@edit')->name('editSocio');
     Route::post('/socio/{socio}/update', 'Resources\SocioController@update')->name('updateSocio');
     Route::get('/socio/{socio}/destroy', 'Resources\SocioController@destroy')->name('destroySocio');

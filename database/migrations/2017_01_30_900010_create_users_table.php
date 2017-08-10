@@ -22,7 +22,7 @@ class CreateUsersTable extends Migration
             $table->increments('id');
             $table->string('nome');
             $table->string('apelido');
-            $table->string('imagem')->default('storage/avatars/default.png');
+            $table->string('imagem')->default('default.png');
             $table->string('email')->unique();
             $table->string('password')->default('');
             $table->integer('perm_level')->default(1);

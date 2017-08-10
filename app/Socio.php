@@ -12,7 +12,7 @@ class Socio extends Model
     protected $table = 'socios';
 
     protected $fillable = [
-        'nome', 'numero', 'imagem', 'morada_id', 'user_id', 'nif', 'cartao_cidadao', 'email', 'telemovel', 'cotas_ate', 'data_inicio', 'visivel',
+        'nome', 'numero', 'imagem', 'morada_id', 'user_id', 'nif', 'cartao_cidadao', 'email', 'telemovel', 'cotas_ate', 'data_inicio', 'visivel', 'estado'
     ];
 
     protected function morada(){
