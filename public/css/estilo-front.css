@@ -1,0 +1,357 @@
+/* Page layout */
+html,
+body {
+    margin:0;
+    padding:0;
+    height:100%;
+}
+
+.g-recaptcha {
+    width: 304px;
+    display: block;
+    margin: 0 auto; !Important
+}
+
+#wrapper {
+    min-height:100%;
+    position:relative;
+}
+
+#header {
+    padding:0px;
+}
+
+#content {
+    padding-bottom: 212px; /* Height of the footer element */
+}
+#footer {
+    width:100%;
+    height:212px; /* Altura do footer */
+    position:absolute;
+    bottom:0;
+    left:0;
+    margin-bottom: 0px;
+}
+
+.conteudo {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    line-height: 30px;
+    position: relative;
+}
+
+/* Fim page layout */
+
+/* Rodapé */
+
+#rodape {
+    background-color: rgb(11,101,75);
+    margin: 0px 0px 0px 0px;
+    min-height: 212px; /* Altura do rodape */
+    padding-top: 5px;
+}
+
+#rodape p {
+    font-size: 18px;
+    color: white;
+}
+
+#rodape a {
+    text-decoration: none;
+    color: rgb(216, 216, 216);
+    font-weight: 300;
+    font-size: 18px;
+}
+
+#rodape a:hover {
+    color: rgb(255,244,22);
+}
+
+#rodape a:focus {
+    outline: none;
+}
+
+#rodape h5 {
+    color: rgb(187, 187, 187);
+    font-weight: 500;
+    font-size: 22px;
+}
+
+.rodape-info {
+    /*min-height: 160px;*/
+}
+
+.rodape-copyright {
+    position: relative;
+    width: 100%;
+    height: 50px;
+    line-height: 50px;
+    background-color: rgba(1,1,1,0.3);
+}
+
+.rodape-copyright p {
+    color: #FFFFFF;
+    font-weight: 300;
+    line-height: 40px;
+    margin: 0px 0px 0px 0px;
+    font-size: 16px;
+    padding: 5px 0px 5px 0px;
+}
+
+.social {
+    margin-top: 20px;
+}
+
+.social .facebook-btn a{
+    font-size: 50px;
+}
+
+.social .facebook-btn a:hover{
+    font-size: 50px;
+    color: blue;
+}
+/* Fim Rodapé */
+
+
+/* Estilos gerais */
+h1{
+    color: #1d1d1d;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 100;
+    font-size: 48px;
+    margin: 20px 0px 20px 0px;
+    /*text-shadow: #101010 2px 2px 3px 0.5;*/
+}
+
+h2{
+    color: #1d1d1d;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+    font-size: 40px;
+    margin: 15px 0px 15px 0px;
+    /*text-shadow: #101010 2px 2px 3px 0.5;*/
+}
+
+h3 {
+    color: #1d1d1d;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+    font-size: 32px;
+    margin: 10px 0px 10px 0px;
+    /*text-shadow: #101010 2px 2px 3px 0.5;*/
+}
+
+h4 {
+    color: #1d1d1d;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+    font-size: 32px;
+    margin: 10px 0px 10px 0px;
+    /*text-shadow: #101010 2px 2px 3px 0.5;*/
+}
+
+p {
+    color: #1d1d1d;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+    font-size: 20px;
+    /*text-shadow: #101010 2px 2px 3px 0.5;*/
+}
+
+a {
+    color: rgb(11,101,75);
+    text-decoration: double;
+    font-weight: 400;
+    text-shadow: 0px 0px 1px #333333;
+}
+
+a:hover {
+    color: rgb(255,244,22);
+    text-shadow: 0px 0px 6px #333333;
+}
+
+a:focus {
+    outline: none;
+}
+
+/* Fim estilos gerais */
+
+/* Navbar */
+.dropdown-content-custom {
+    margin-top: 64px;
+    background-color: rgb(11,101,75);
+    color: white;
+}
+
+.dropdown-content-custom a {
+    color: white;
+    font-weight: 300;
+    font-size: 16px;
+}
+
+.dropdown-content-custom li {
+
+}
+
+.dropdown-content-custom li:hover {
+    background-color: rgb(10,95,70);
+}
+
+.dropdown-content-custom li a {
+    color: white;
+
+}
+
+.dropdown-content-custom a:hover {
+    color: rgb(255,244,22);
+    background-color: rgb(10,95,70);
+}
+
+.dropdown-content-custom li:hover li.active li.selected{
+    background-color: rgb(10,95,70);
+}
+
+.dropdown-content-custom li.active.selected {
+    background-color: rgb(10,95,70);
+}
+
+.navbar-logo {
+    position: relative;
+    margin-top: 3px;
+    max-height: 58px;
+}
+
+.top-nav a {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+    font-size: 18px;
+}
+
+.top-nav a:hover {
+    color: rgb(255,244,22);
+}
+
+/* Fim Navbar */
+
+.verde-mamede{
+    background-color: rgb(11,101,75);
+}
+
+.amarelo-mamede {
+    background-color: rgb(255,244,22);
+}
+
+.jogos {
+
+    max-height: 349px;
+    position: relative;
+    width: 100%;
+    text-align: center;
+}
+
+.jogos img {
+    max-height: 350px;
+    left: 0;
+    right: 0;
+    width: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.jogos h1 {
+    display: block;
+    position: absolute;
+    top: 200px;
+    left: 0;
+    width: 100%;
+}
+
+.contactos {
+    background-color: #031432;
+    min-height: 100px;
+    max-height: 250px;
+}
+
+.contactos a {
+    margin-top: 2%;
+    display: inline-block;
+}
+
+.row {
+    margin-bottom: 0px;
+}
+
+.marcador {
+    background-color: #03143d;
+}
+
+.resultados {
+    background-color: #030f26;
+}
+
+.classificacao {
+    background-color: #031641;
+}
+
+.login-facebook-btn {
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+    font-family: 'Roboto', sans-serif;
+    color: #ffffff;
+    font-size: 20px;
+    background: #3b5898;
+    padding: 10px 20px 10px 20px;
+    text-decoration: none;
+    border: none;
+    margin: 5px 5px 5px 5px;
+    width: 100%;
+}
+
+.login-facebook-btn:hover {
+    background: #2d4a82;
+    text-decoration: none;
+}
+
+.login-twitter-btn {
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+    font-family: 'Roboto', sans-serif;
+    color: #ffffff;
+    font-size: 20px;
+    background: #1DA1F2;
+    padding: 10px 20px 10px 20px;
+    text-decoration: none;
+    border: none;
+    margin: 5px 5px 5px 5px;
+    width: 100%;
+}
+
+.login-twitter-btn:hover {
+    background: #0a82c7;
+    text-decoration: none;
+}
+
+.login-google-btn {
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+    font-family: 'Roboto', sans-serif;
+    color: #ffffff;
+    font-size: 20px;
+    background: #e53835;
+    padding: 10px 20px 10px 20px;
+    text-decoration: none;
+    border: none;
+    margin: 5px 5px 5px 5px;
+    width: 100%;
+}
+
+.login-google-btn:hover {
+    background: #bd1815;
+    text-decoration: none;
+}
+
+
+

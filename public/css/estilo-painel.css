@@ -1,0 +1,123 @@
+html {
+    margin-bottom: 0px;
+    margin-top: 0px
+}
+
+body {
+    margin-top: 0px;
+}
+
+main {
+    margin-left: 300px;
+}
+
+.contentor {
+
+    position: relative;
+    width: 90%;
+    padding: 10px;
+
+}
+
+.page-content {
+
+    width: 100%;
+    height: 100%;
+    background-color: #FFFFFF;
+}
+
+.page-content p {
+
+    font-color: #292929;
+
+}
+
+.link a {
+    text-decoration: none;
+    color: #1376ff;
+}
+
+.link a:hover {
+    text-decoration: none;
+    color: #006c04;
+}
+
+.link a:active {
+    text-decoration: none;
+    outline: 0;
+}
+
+.link a:focus {
+    text-decoration: none;
+    outline: 0;
+    color: #006c04;
+}
+
+.conteudo {
+
+    width: 100%;
+    padding: 10px 10px 10px 10px;
+}
+
+.desktop-content {
+
+    mmargin-left: 0px;
+
+}
+
+.caixa-delimitadora-fina {
+
+    border: solid;
+    border-width: 1px;
+    border-color: rgba(0,0,0,0.3);
+    border-radius: 2px;
+    width: 100%;
+    padding: 5px 10px 5px 10px;
+    background: transparent;
+    margin-bottom: 15px;
+}
+
+.linha-separadora {
+    height: 1px;
+    border: solid;
+    border-bottom: 1px;
+    border-color: rgba(0,0,0,0.3);
+    width: 100%;
+    margin: 5px 10px 5px 10px;
+}
+
+@media only screen and (min-width: 993px) {
+
+    .desktop-content {
+        margin-left: 300px;
+    }
+
+}
+
+.no-link-stuff p {
+    text-decoration: none;
+    text-transform: none;
+    color: black;
+}
+
+.white-text-btn {
+    color: white;
+    text-decoration: none;
+    text-transform: none;
+}
+
+.mensagem-sucesso {
+     color: green;
+}
+
+.mensagem-aviso {
+    color: orange;
+}
+.mensagem-info {
+    color: dodgerblue;
+}
+
+.mensagem-erro {
+    color: red;
+}
+
