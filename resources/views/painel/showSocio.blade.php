@@ -52,7 +52,7 @@
                     <div class="caixa-delimitadora-fina">
                         <a class="waves-effect waves-light btn green" style="width:100%">Voltar</a>
 
-                        <a class="waves-effect waves-light btn blue" style="width:100%; margin-top: 5px">Editar</a>
+                        <a href="{{ route('editSocio', $socio) }}" class="waves-effect waves-light btn blue" style="width:100%; margin-top: 5px">Editar</a>
 
                         <a class="waves-effect waves-light btn orange" style="width:100%; margin-top: 5px">Atualizar Cotas</a>
 

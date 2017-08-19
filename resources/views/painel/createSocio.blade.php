@@ -146,7 +146,7 @@
 
             var codigo_postal = document.getElementById('codigo_postal');
             codigo_postal.setAttribute('value', '4750-');
-            codigo_postal.classList.add('valid');
+            codigo_postal.classList.add('invalid');
 
             var localidade = document.getElementById('localidade');
             localidade.setAttribute('value', 'Vilar do Monte');

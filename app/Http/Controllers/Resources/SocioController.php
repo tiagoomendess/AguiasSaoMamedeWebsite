@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Resources;
 
 use App\Socio;
 use Carbon\Carbon;
+use Faker\Provider\cs_CZ\DateTime;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Morada;
@@ -70,6 +71,8 @@ class SocioController extends Controller
         $email = $request->input('email');
         $telemovel = $request->input('telemovel');
         $data_inicio = $request->input('data_inicio');
+        $cotas_ate = Carbon::createFromTime(0,0);
+
         //Foto
         if ($request->hasFile('fotografia')) {
 
@@ -125,7 +128,7 @@ class SocioController extends Controller
             'email' => $email,
             'telemovel' => $telemovel,
             'data_inicio' => $data_inicio,
-            'cotas_ate' => DB::raw('CURRENT_TIMESTAMP'),
+            'cotas_ate' => $cotas_ate->toDateString(),
             'visivel' => true,
             'estado' => 1,
         ]);
@@ -154,7 +157,14 @@ class SocioController extends Controller
      */
     public function edit(Socio $socio)
     {
-        //
+        $morada = Morada::find($socio->morada_id);
+
+        if ($socio->user_id == null)
+            $user = null;
+        else
+            $user = User::findOrFail($socio->user_id);
+
+        return view('painel.editSocio', ['socio' => $socio, 'morada' => $morada, 'user' => $user]);
     }
 
     /**
@@ -162,9 +172,9 @@ class SocioController extends Controller
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  \App\Socio  $socio
-     * @return \Illuminate\Http\Response
+     * @return
      */
-    public function update(Request $request, Socio $socio)
+    public function update(Request $request, Socio $socio, Morada $morada, User $user = null)
     {
         //
     }
