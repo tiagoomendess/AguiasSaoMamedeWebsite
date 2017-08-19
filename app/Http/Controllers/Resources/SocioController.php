@@ -142,7 +142,8 @@ class SocioController extends Controller
      */
     public function show(Socio $socio)
     {
-        return view('painel.showSocio')->with(['socio' => $socio]);
+        $morada = Morada::find($socio->morada_id);
+        return view('painel.showSocio')->with(['socio' => $socio, 'morada' => $morada]);
     }
 
     /**

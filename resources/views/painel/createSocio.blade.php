@@ -67,6 +67,12 @@
             </div>
         </div>
 
+        <div class="row">
+            <div class="input-field col s12 m12 l4 offset-l4">
+                <a class="waves-effect waves-light btn" onclick="MoradaAuto()" style="width:100%">Morada Auto</a>
+            </div>
+        </div>
+
 
         <div class="row">
             <div class="input-field col s9">
@@ -92,28 +98,22 @@
                 <label for="localidade">Freguesia</label>
             </div>
 
-            <div class="input-field col s12 m4 l3">
+            <div class="input-field col s12 m6 l3">
                 <input name="cidade" id="cidade" type="text" class="validate" value="{{old('cidade')}}">
                 <label for="cidade">Cidade</label>
             </div>
 
-            <div class="input-field col s12 m4 l3">
+            <div class="input-field col s12 m6 l3">
                 <select class="browser-default" name="pais">
-                    <option value="portugal" selected>Portugal</option>
-                    <option value="frança">França</option>
-                    <option value="espanha">Espanha</option>
-                    <option value="inglaterra">Inglaterra</option>
-                    <option value="italia">Italia</option>
-                    <option value="angola">Angola</option>
-                    <option value="moçambique">Moçambique</option>
+                    <option value="Portugal" selected>Portugal</option>
+                    <option value="França">França</option>
+                    <option value="Espanha">Espanha</option>
+                    <option value="Inglaterra">Inglaterra</option>
+                    <option value="Italia">Italia</option>
+                    <option value="Angola">Angola</option>
+                    <option value="Moçambique">Moçambique</option>
                 </select>
             </div>
-
-            <div class="input-field col s12 m4 l3">
-                    <a class="waves-effect waves-light btn" style="width:100%">Morada Auto</a>
-            </div>
-
-
 
         </div>
 
@@ -141,6 +141,23 @@
             close: 'Ok',
             closeOnSelect: false // Close upon selecting a date,
         });
+
+        function MoradaAuto() {
+
+            var codigo_postal = document.getElementById('codigo_postal');
+            codigo_postal.setAttribute('value', '4750-');
+            codigo_postal.classList.add('valid');
+
+            var localidade = document.getElementById('localidade');
+            localidade.setAttribute('value', 'Vilar do Monte');
+            localidade.classList.add('valid');
+
+            var cidade = document.getElementById('cidade');
+            cidade.setAttribute('value', 'Barcelos');
+            cidade.classList.add('valid');
+
+            Materialize.updateTextFields();
+        }
 
     </script>
 @endsection

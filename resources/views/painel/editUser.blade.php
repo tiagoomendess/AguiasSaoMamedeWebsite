@@ -132,19 +132,21 @@
 
             <div class="caixa-delimitadora-fina">
 
-                <div class="col l12">
-                    @include('parcial.errors', ['errors' => $errors])
+                <div class="row">
+                    <div class="col l12">
+                        @include('parcial.errors', ['errors' => $errors])
+                    </div>
                 </div>
 
+
                 <form method="POST" action="{{ route('updateUtilizador', ['user' => $user]) }}">
-                    {{ csrf_field() }}
 
                     <div class="row">
-                        <div class="input-field col s6">
+                        <div class="input-field col s6 m6 l6">
                             <input name="nome" id="first_name" type="text" class="validate" value="{{ old('nome', $user->nome)}}" required>
                             <label for="first_name">@lang('auth.form_name')</label>
                         </div>
-                        <div class="input-field col s6">
+                        <div class="input-field col s6 m6 l6">
                             <input name="apelido" id="last_name" type="text" class="validate" value="{{ old('apelido', $user->apelido)}}" required>
                             <label for="last_name">@lang('auth.form_last_name')</label>
                         </div>
@@ -195,6 +197,8 @@
 
 
                     </div>
+
+                    {{ csrf_field() }}
 
                 </form>
             </div>
