@@ -20,7 +20,7 @@ class CreateSociosTable extends Migration
 
             //Colunas
             $table->increments('id')->unique();
-            $table->integer('numero')->unique(); //Numero de sócio
+            $table->integer('numero')->unique()->nullable(); //Numero de sócio
             $table->string('nome');
             $table->string('imagem')->default('default.png');
             $table->integer('morada_id')->unsigned()->nullable()->references('id')->on('moradas');

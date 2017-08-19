@@ -17,7 +17,7 @@
 
         <div class="row">
             <div class="input-field col s12 m6">
-                <input name="numero" id="numero" type="number" class="validate" value="{{ DB::table('socios')->count() + 1 }}" required>
+                <input name="numero" id="numero" type="number" class="validate" value="{{$proximoNumero }}" required>
                 <label for="numero">Numero de sócio</label>
             </div>
 
@@ -135,6 +135,7 @@
         $('.datepicker').pickadate({
             selectMonths: true, // Creates a dropdown to control month
             selectYears: 15, // Creates a dropdown of 15 years to control year,
+            format: 'yyyy-mm-dd',
             today: 'Hoje',
             clear: 'Limpar',
             close: 'Ok',

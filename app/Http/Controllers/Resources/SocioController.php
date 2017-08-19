@@ -26,11 +26,18 @@ class SocioController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return
      */
     public function create()
     {
-        return view('Painel.createSocio');
+        $ultimo_socio = Socio::where('visivel', true)->orderBy('numero', 'desc')->take(1)->first();
+
+        if ($ultimo_socio == null)
+            $proximoNumero = 1;
+        else
+            $proximoNumero = $ultimo_socio->numero + 1;
+
+        return view('Painel.createSocio')->with(['proximoNumero' => $proximoNumero]);
     }
 
     /**
@@ -65,15 +72,17 @@ class SocioController extends Controller
         $data_inicio = $request->input('data_inicio');
         //Foto
         if ($request->hasFile('fotografia')) {
+
             $fotografia = $request->file('fotografia');
-            $filename = $fotografia->getFilename() . time() . str_random(4) . '.' . $fotografia->getClientOriginalExtension();
+            $clientFileName = $fotografia->getClientOriginalName();
+            $clientFileName = str_replace('.jpg', '', $clientFileName);
+            $clientFileName = str_replace('.png', '', $clientFileName);
+            $filename = $clientFileName . time() . str_random(4) . '.' . $fotografia->getClientOriginalExtension();
             $img = Image::make($fotografia);
             $img->fit(400);
             $img->save( public_path('storage/uploads/avatars/socios/') . $filename);
-            dd('Tem imagem');
 
         } else {
-            dd('Default Foto');
             $filename = 'default.png';
         }
 
