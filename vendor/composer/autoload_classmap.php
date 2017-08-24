@@ -20,6 +20,7 @@ return array(
     'CreateNoticiasTable' => $baseDir . '/database/migrations/2017_01_30_900030_create_noticias_table.php',
     'CreatePaginasTable' => $baseDir . '/database/migrations/2017_01_30_900040_create_paginas_table.php',
     'CreatePasswordResetsTable' => $baseDir . '/database/migrations/2017_01_30_900020_create_password_resets_table.php',
+    'CreatePaymentsTable' => $baseDir . '/database/migrations/2017_08_24_173930_create_payments_table.php',
     'CreateSocialProvidersTable' => $baseDir . '/database/migrations/2017_07_11_133844_create_social_providers_table.php',
     'CreateSociosTable' => $baseDir . '/database/migrations/2017_01_30_900020_create_socios_table.php',
     'CreateUsersTable' => $baseDir . '/database/migrations/2017_01_30_900010_create_users_table.php',

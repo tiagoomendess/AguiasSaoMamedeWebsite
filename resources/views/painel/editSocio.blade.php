@@ -8,6 +8,8 @@
 
     @include('painel.parcial.message')
 
+    @include('painel.parcial.message')
+
     <div class="row">
 
         <div class="col l5 m12 s12">

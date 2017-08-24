@@ -6,6 +6,8 @@
 
 @section('page_content')
 
+    @include('painel.parcial.message')
+
     <div class="row">
         <div class="col l8 m12 s12">
 

@@ -288,8 +288,10 @@ class SocioController extends Controller
         {
             if (Socio::where('numero', $numero_socio)->count() < 1)
                 $socio->numero = $numero_socio;
-            else
+            else {
                 Session::flash('mensagem-erro', 'Não foi possível alterar o número de sócio porque já existe um outro sócio com esse número.');
+                return back();
+            }
 
         }
 
@@ -333,6 +335,22 @@ class SocioController extends Controller
         $morada->save();
 
         return redirect(route('showSocio', $socio));
+    }
+
+    public function atualizarCotas(Request $request, Socio $socio) {
+
+        $this->validate($request, [
+            'cotas_ate' => 'timestamp|required',
+            'montante_pago' => '',
+        ]);
+
+        $cotas_ate = $request->input('cotas_ate');
+        $socio->cotas_ate = $cotas_ate;
+
+        Session::flash('mensagem-sucesso', 'Cota atualizada com sucesso');
+
+        return redirect()->back();
+
     }
 
     /**
