@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateLogsTable extends Migration
+class CreateListaCotasTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,11 @@ class CreateLogsTable extends Migration
      */
     public function up()
     {
-        Schema::create('logs', function (Blueprint $table) {
+        Schema::create('lista_cotas', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('level')->default(1); //1- Info, 2-Aviso, 3-Erro
-            $table->timestamp('date')->default(DB::raw('CURRENT_TIMESTAMP'));
-            $table->string('description')->default('No description');
+            $table->string('nome')->default('Cota ' . \Carbon\Carbon::now()->year)->unique();
+            $table->timestamp('data_inicio'); //Validade da cota
+            $table->timestamp('data_fim');    //Validade da cota
             $table->timestamps();
         });
     }
@@ -29,6 +29,6 @@ class CreateLogsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('logs');
+        Schema::dropIfExists('lista_cotas');
     }
 }

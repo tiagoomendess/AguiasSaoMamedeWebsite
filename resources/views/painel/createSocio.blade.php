@@ -62,7 +62,7 @@
 
         <div class="row">
             <div class="input-field col s12">
-                <input id="data_inicio" name="data_inicio" type="text" class="datepicker" value="{{ \Carbon\Carbon::now()->toDateString() }}">
+                <input id="data_inicio" name="data_inicio" type="text" class="datepicker" value="">
                 <label for="data_inicio">Sócio desde</label>
             </div>
         </div>

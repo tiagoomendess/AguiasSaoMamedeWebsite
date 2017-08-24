@@ -27,11 +27,20 @@
                         <p class="flow-text"><b>Sócio desde:</b> {{ \Carbon\Carbon::parse($socio->data_inicio)->format('d-m-Y') }}</p>
 
                         <p class="flow-text"><b>Cotas:</b>
-                            @if(Carbon\Carbon::now()->timestamp > \Carbon\Carbon::parse($socio->cotas_ate)->timestamp)
-                                Até {{ \Carbon\Carbon::parse($socio->cotas_ate)->format('d-m-Y') }}<span class="new badge red" data-badge-caption="">Em Atraso</span>
+
+
+                            @if($cotas->count() < 1)
+                                <b style="color: red">Sem cotas</b>
                             @else
-                                Até {{ \Carbon\Carbon::parse($socio->cotas_ate)->format('d-m-Y') }}<span class="new badge green" data-badge-caption="">Em dia</span>
+
+                                {{ $cotas->last()->nome }} <small>Paga em {{ \Carbon\Carbon::parse($cotas->last()->data)->format('d-m-Y') }}</small>
+
+                                @if(\Carbon\Carbon::parse($cotas->last()->data)->year > \Carbon\Carbon::now()->year)
+                                    <span class="new badge red" data-badge-caption="">Em Atraso</span>
+                                @endif
+
                             @endif
+
                         </p>
                         <p class="flow-text"><b>Estado:</b>
                             @if($socio->estado == 1)
@@ -56,7 +65,64 @@
 
                         <a href="{{ route('editSocio', $socio) }}" class="waves-effect waves-light btn blue" style="width:100%; margin-top: 5px">Editar</a>
 
-                        <a class="waves-effect waves-light btn orange" style="width:100%; margin-top: 5px">Atualizar Cotas</a>
+                        <a href="#modal-cotas" class="waves-effect waves-light btn orange modal-trigger" style="width:100%; margin-top: 5px">Atualizar Cotas</a>
+
+                        <div id="modal-cotas" class="modal">
+                            <div class="modal-content">
+                                <div class="col s10 m10 l10 offset-l1 offset-m1 offset-s1">
+                                    <h4 class="center">Atualizar Cotas do Sócio Número {{ $socio->numero }}</h4>
+
+                                    <p class="flow-text center">
+                                        Este sócio tem <b>{{ $cotas->count() }}</b> cotas pagas registadas no sistema.
+                                    </p>
+
+                                    <form action="" method="POST">
+
+                                        {{ csrf_field() }}
+
+                                        <div class="row">
+
+
+
+                                            <div class="input-field col s6 m6 l3 offset-l3">
+                                                <input name="data" id="data" type="text" class="validate" value="{{ old('data', \Carbon\Carbon::now()->format('Y-m-d'))}}" required>
+                                                <label for="data">Data de pagamento</label>
+                                            </div>
+
+                                            <div class="input-field col s6 m6 l3">
+                                                <input name="montante" id="montante" type="number" step="0.01" class="validate" value="10.00" required>
+                                                <label for="montante">Montante</label>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="row">
+
+                                            <div class="input-field col s6 m6 l6">
+
+                                                <button class="btn waves-effect waves-light btn-large red right @if ($cotas->count() < 1) disabled @endif" type="submit" name="action">
+                                                    Remover Anterior
+                                                    <i class="material-icons right">arrow_back</i>
+                                                </button>
+                                            </div>
+
+                                            <div class="input-field col s6 m6 l6">
+                                                <button class="btn waves-effect waves-light btn-large green left" type="submit" name="action"> Pagar {{ $proxima_cota->nome }}
+                                                    <i class="material-icons left">arrow_forward</i>
+
+                                                </button>
+                                            </div>
+
+                                        </div>
+
+                                        <input type="hidden" name="cota_id" value="{{ $proxima_cota->id }}">
+
+                                    </form>
+                                </div>
+
+                            </div>
+
+                        </div>
 
                         <a class="waves-effect waves-light btn modal-trigger red" href="#modal-eliminar" style="width:100%; margin-top: 5px">Eliminar</a>
 
@@ -98,6 +164,7 @@
         $(document).ready(function(){
             // the "href" attribute of the modal trigger must specify the modal ID that wants to be triggered
             $('#modal-eliminar').modal();
+            $('#modal-cotas').modal();
         });
     </script>
 @endsection

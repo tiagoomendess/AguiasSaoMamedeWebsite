@@ -87,7 +87,7 @@
         <div class="col l4 m12 s12">
             <div class="caixa-delimitadora-fina">
 
-                <h5>Por Aceitar</h5>
+                <h5>Por Aceitar <small>({{ $propostas->count() }})</small></h5>
 
                 <div class="divider"></div>
 

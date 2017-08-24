@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Resources;
 
+use App\Cota;
+use App\ListaCotas;
 use App\Socio;
 use Carbon\Carbon;
 use Faker\Provider\cs_CZ\DateTime;
@@ -95,7 +97,7 @@ class SocioController extends Controller
             'cc' => 'nullable|numeric',
             'email' => 'nullable|email|min:5|max:50',
             'telemovel' => 'nullable|string|min:9|max:20',
-            'data_inicio' => 'required|date',
+            'data_inicio' => 'date|nullable',
             'fotografia' => 'nullable|image|max:10000',
             'rua' => 'required|string|min:4|max:30',
             'numero_porta' => 'required|numeric',
@@ -111,7 +113,6 @@ class SocioController extends Controller
         $email = $request->input('email');
         $telemovel = $request->input('telemovel');
         $data_inicio = $request->input('data_inicio');
-        $cotas_ate = Carbon::createFromTime(0,0);
 
         //Foto
         if ($request->hasFile('fotografia')) {
@@ -168,9 +169,8 @@ class SocioController extends Controller
             'email' => $email,
             'telemovel' => $telemovel,
             'data_inicio' => $data_inicio,
-            'cotas_ate' => $cotas_ate->toDateString(),
             'visivel' => true,
-            'estado' => 1,
+            'estado' => 0,
         ]);
 
         return redirect(route('showSocio', $socio));
@@ -188,8 +188,22 @@ class SocioController extends Controller
         if ($socio->estado == 3)
             abort(404);
 
+        $cotas = Cota::where('socio_id', $socio->id);
+
+
+        //Saber qual a proxima cota a pagar
+        if ($cotas->count() < 1) {
+
+            $proxima_cota = ListaCotas::where('data_inicio', '<', $socio->created_at);
+            $proxima_cota = $proxima_cota->where('data_fim', '>', $socio->created_at)->first();
+
+                //dd($proxima_cota);
+        }else {
+            $proxima_cota = ListaCotas::find($cotas->last()->cota_id + 1);
+        }
+
         $morada = Morada::find($socio->morada_id);
-        return view('painel.showSocio')->with(['socio' => $socio, 'morada' => $morada]);
+        return view('painel.showSocio')->with(['socio' => $socio, 'morada' => $morada, 'cotas' => $cotas, 'proxima_cota' => $proxima_cota]);
     }
 
     /**
@@ -340,15 +354,18 @@ class SocioController extends Controller
     public function atualizarCotas(Request $request, Socio $socio) {
 
         $this->validate($request, [
-            'cotas_ate' => 'timestamp|required',
-            'montante_pago' => '',
+            'cota_id' => 'numeric|required'
         ]);
 
-        $cotas_ate = $request->input('cotas_ate');
-        $socio->cotas_ate = $cotas_ate;
+        $cota_id = $request->input('cota_id');
+
+        $cota = ListaCotas::find($cota_id);
+        if ($cota == null) {
+            Session::flash('mensagem-erro', 'Cota invalida.');
+            return back();
+        }
 
         Session::flash('mensagem-sucesso', 'Cota atualizada com sucesso');
-
         return redirect()->back();
 
     }
