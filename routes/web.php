@@ -23,7 +23,8 @@ Route::group(['prefix' => 'painel', 'middleware' => 'admin'], function () {
     })->name('painel');
 
     Route::get('/socio/{socio}/show', 'Resources\SocioController@show')->name('showSocio');
-    Route::get('/socios', 'Resources\SocioController@index')->name('socios');
+    Route::get('/socios', 'Resources\SocioController@showSocios')->name('socios');
+    Route::post('/socios', 'Resources\SocioController@showSocios')->name('socios'); //para procurar nomes especificos
     Route::get('/socios/atrasados', 'Resources\SocioController@sociosAtrasados')->name('sociosAtrasados');
     Route::get('/socio/create', 'Resources\SocioController@create')->name('createSocio');
     Route::post('/socio/store', 'Resources\SocioController@store')->name('storeSocio');

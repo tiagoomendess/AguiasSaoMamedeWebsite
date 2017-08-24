@@ -10,5 +10,6 @@ return [
     'eliminar' => 'Eliminar',
     'imagem' => 'Imagem',
     'imagem_url' => 'URL Imagem',
+    'numero_socio' => 'Número de Sócio',
 
 ];

@@ -20,7 +20,7 @@ class UserController extends Controller
         if ($request->has('procura')) { //Se existir filtro
 
             $nome = $request->input('nome');
-            $email = $request->input('request');
+            $email = $request->input('email');
 
             if ($nome != null && $nome != '') {
 

@@ -59,14 +59,23 @@
                         </div>
 
                         <div class="file-field input-field col s12">
-                            <div class="btn">
-                                <span>Fotografia</span>
+                            <div class="btn orange">
+                                <span>Alterar Fotografia</span>
                                 <input type="file" name="fotografia" accept="image/*" id="capture" capture="camera">
                             </div>
                             <div class="file-path-wrapper">
                                 <input class="file-path validate" type="text" value="{{ $socio->imagem }}">
                             </div>
+
+                            @if($socio->imagem != 'default.png')
+                                <div>
+                                    <input name="default_image" type="checkbox" id="default_image" />
+                                    <label for="default_image">Atribuir imagem de defeito</label>
+                                </div>
+                            @endif
+
                         </div>
+
                     </div>
 
                     <div class="row">
@@ -87,6 +96,13 @@
                         <div class="input-field col s12">
                             <input name="cartao_cidadao" id="cartao_cidadao" type="text" class="validate" value="{{ old('cartao_cidadao', $socio->cartao_cidadao)}}" required>
                             <label for="cartao_cidadao">Cartão de Cidadão</label>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <input id="data_inicio" name="data_inicio" type="text" class="datepicker" value="{{ \Carbon\Carbon::now()->toDateString() }}">
+                            <label for="data_inicio">Sócio desde</label>
                         </div>
                     </div>
 
@@ -176,7 +192,14 @@
 
 @section ('after-scripts')
     <script>
-        $('#modal-ban').modal()
-        $('#modal-unban').modal();
+        $('.datepicker').pickadate({
+            selectMonths: true, // Creates a dropdown to control month
+            selectYears: 15, // Creates a dropdown of 15 years to control year,
+            format: 'yyyy-mm-dd',
+            today: 'Hoje',
+            clear: 'Limpar',
+            close: 'Ok',
+            closeOnSelect: false // Close upon selecting a date,
+        });
     </script>
 @endsection

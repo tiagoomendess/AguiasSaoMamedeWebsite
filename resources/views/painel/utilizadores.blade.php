@@ -28,7 +28,7 @@
                         </div>
 
                         <div class="input-field col s12 m12 l12">
-                            <input name="email" id="email" type="email" class="validate" value="{{ old('email') }}">
+                            <input name="email" id="email" type="email" class="validate" value="@if (isset($email)){{ $email }}@endif">
                             <label for="email">@lang('auth.form_email')</label>
                         </div>
 

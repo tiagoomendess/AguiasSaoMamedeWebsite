@@ -28,7 +28,7 @@ class CreateSociosTable extends Migration
             $table->string('cartao_cidadao')->nullable();
             $table->string('email')->nullable();
             $table->string('telemovel')->nullable();
-            $table->timestamp('data_inicio')->default(DB::raw('CURRENT_TIMESTAMP'));
+            $table->timestamp('data_inicio')->nullable();
             $table->timestamp('cotas_ate')->default(DB::raw('CURRENT_TIMESTAMP'));
             $table->integer('estado')->default(0); //0 é proposta de socio, 1 é socio aceite, 2 é falecido, 3 é eliminado.
             $table->timestamps();
