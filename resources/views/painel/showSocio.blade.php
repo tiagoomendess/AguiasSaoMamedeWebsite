@@ -56,10 +56,46 @@
 
                         <a class="waves-effect waves-light btn orange" style="width:100%; margin-top: 5px">Atualizar Cotas</a>
 
-                        <a class="waves-effect waves-light btn red" style="width:100%; margin-top: 5px">Eliminar</a>
+                        <a class="waves-effect waves-light btn modal-trigger red" href="#modal-eliminar" style="width:100%; margin-top: 5px">Eliminar</a>
+
+                        <!-- Modal Structure -->
+                        <div id="modal-eliminar" class="modal">
+                            <div class="modal-content">
+                                <div class="col s10 m10 l10 offset-l1 offset-m1 offset-s1">
+                                    <h4 class="center">Eliminar Sócio Número {{ $socio->numero }}</h4>
+                                    <p class="center flow-text">Tem a certeza que pretende eliminar <b>{{ $socio->nome }}</b> da lista de sócios?</p>
+                                </div>
+
+                            </div>
+                            <div class="modal-footer">
+                                <div class="col s10 m10 l10 offset-l1 offset-m1 offset-s1">
+                                    <div class="row">
+                                        <div class="col s6">
+                                            <a href="#" class="modal-action modal-close waves-effect waves-green btn green right">Não</a>
+                                        </div>
+
+                                        <div class="col s6">
+                                            <a href="{{ route('destroySocio', $socio->id) }}" class="modal-action modal-close waves-effect waves btn red left">Sim</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </div>
         </div>
+
+
     </div>
+@endsection
+
+@section('after-scripts')
+    <script>
+        $(document).ready(function(){
+            // the "href" attribute of the modal trigger must specify the modal ID that wants to be triggered
+            $('#modal-eliminar').modal();
+        });
+    </script>
 @endsection

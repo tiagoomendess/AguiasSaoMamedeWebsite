@@ -47,6 +47,7 @@ class SocioController extends Controller
                 $socios = DB::table('socios');
             }
 
+            $socios = $socios->where('estado', 1)->orWhere('estado', 2);
             $socios = $socios->paginate(25);
             $propostas = Socio::where('estado', 0)->get();
 
@@ -54,7 +55,7 @@ class SocioController extends Controller
 
         }
 
-        $socios = Socio::where('estado', '!=', 0);
+        $socios = Socio::where('estado', 1)->orWhere('estado', 2);
         $socios = $socios->paginate(25);
 
         $propostas = Socio::where('estado', 0)->get();
@@ -70,7 +71,7 @@ class SocioController extends Controller
      */
     public function create()
     {
-        $ultimo_socio = Socio::where('visivel', true)->orderBy('numero', 'desc')->take(1)->first();
+        $ultimo_socio = Socio::where('estado', 1)->orWhere('estado', 2)->orderBy('numero', 'desc')->take(1)->first();
 
         if ($ultimo_socio == null)
             $proximoNumero = 1;
@@ -184,6 +185,9 @@ class SocioController extends Controller
      */
     public function show(Socio $socio)
     {
+        if ($socio->estado == 3)
+            abort(404);
+
         $morada = Morada::find($socio->morada_id);
         return view('painel.showSocio')->with(['socio' => $socio, 'morada' => $morada]);
     }
@@ -196,6 +200,9 @@ class SocioController extends Controller
      */
     public function edit(Socio $socio)
     {
+        if ($socio->estado == 3)
+            abort(404);
+
         $morada = Morada::find($socio->morada_id);
 
         if ($socio->user_id == null)

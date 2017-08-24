@@ -49,7 +49,12 @@
             </div>
 
             <div class="caixa-delimitadora-fina">
-                <h5>Todos os Sócios</h5>
+
+                @if(isset($numero) || isset($nome))
+                    <h5>Resultado da Pesquisa <small>({{ $socios->count() }})</small> </h5>
+                @else
+                    <h5>Todos os Sócios <small>({{ $socios->count() }})</small></h5>
+                @endif
 
                 <div class="divider"></div>
 
