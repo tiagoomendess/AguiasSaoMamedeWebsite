@@ -45,7 +45,8 @@ Route::group(['prefix' => 'painel', 'middleware' => 'admin'], function () {
     Route::post('/utilizador/unban', 'Resources\UserController@unban')->name('unbanUser');
 
     //Definições
-    Route::get('/definicoes', 'Resources\UserController@showUtilizadores')->name('showDefinicoes');
+    Route::get('/definicoes', 'SettingsController@index')->name('settings');
+    Route::post('/definicoes/update', 'SettingsController@update')->name('updateSettings');
 
 });
 //Fim das rotas do painel de administração
@@ -53,7 +54,6 @@ Route::group(['prefix' => 'painel', 'middleware' => 'admin'], function () {
 Route::get('/', ['as' => 'index', 'uses' => 'Front\IndexController@index']);
 
 //Rotas sobre autenticação
-
 Route::get('/registar', 'Auth\MyRegisterController@show')->name('RegisterPage');
 Route::post('/registar', 'Auth\MyRegisterController@regista')->name('Register');
 Route::get('/registar/confirmar', 'Auth\MyRegisterController@showConfirmarRegisto')->name('ConfirmEmailPage');
@@ -67,9 +67,6 @@ Route::get('/password/reset', 'Auth\MyResetPasswordController@show')->name('Rese
 Route::post('/password/reset', 'Auth\MyResetPasswordController@resetPassword')->name('ResetPassword');
 Route::get('/password/change/{token}', 'Auth\MyResetPasswordController@showChangePassword')->name('ChangePasswordPage');
 Route::post('/password/change', 'Auth\MyResetPasswordController@changePassword')->name('ChangePassword');
-
-
-
 //Fim das rotas de autenticação
 
 

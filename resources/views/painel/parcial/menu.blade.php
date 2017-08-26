@@ -32,6 +32,6 @@
 
     <li><a class="waves-effect" href="{{ route('showUtilizadores') }}">{{ trans('menu.utilizadores') }}</a></li>
 
-    <li><a class="waves-effect" href="{{ route('showDefinicoes') }}">{{ trans('menu.definicoes') }}</a></li>
+    <li><a class="waves-effect" href="{{ route('settings') }}">{{ trans('menu.definicoes') }}</a></li>
 
 </ul>
