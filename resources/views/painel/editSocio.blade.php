@@ -172,7 +172,8 @@
                                 <i class="material-icons right">save</i>
                             </button>
 
-                            <a href="{{ route('showSocio', $socio) }}" class="white-text-btn waves-effect waves-light btn light-blue">CANCELAR <i class="material-icons right">cancel</i></a>
+                            <a href="{{ route('showSocio', $socio) }}" class="white-text-btn waves-effect waves-light btn light-blue">CANCELAR
+                                <i class="material-icons right">cancel</i></a>
 
                         </div>
 

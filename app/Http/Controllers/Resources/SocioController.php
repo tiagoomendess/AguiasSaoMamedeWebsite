@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Resources;
 
 use App\Cota;
 use App\ListaCotas;
+use App\Payment;
 use App\Socio;
 use Carbon\Carbon;
 use Faker\Provider\cs_CZ\DateTime;
@@ -14,6 +15,8 @@ use Image;
 use App\User;
 use DB;
 use Session;
+use App\Log;
+use Auth;
 
 class SocioController extends Controller
 {
@@ -188,19 +191,10 @@ class SocioController extends Controller
         if ($socio->estado == 3)
             abort(404);
 
-        $cotas = Cota::where('socio_id', $socio->id);
-
+        $cotas = $socio->getCotas();
 
         //Saber qual a proxima cota a pagar
-        if ($cotas->count() < 1) {
-
-            $proxima_cota = ListaCotas::where('data_inicio', '<', $socio->created_at);
-            $proxima_cota = $proxima_cota->where('data_fim', '>', $socio->created_at)->first();
-
-                //dd($proxima_cota);
-        }else {
-            $proxima_cota = ListaCotas::find($cotas->last()->cota_id + 1);
-        }
+        $proxima_cota = $socio->proximaCota();
 
         $morada = Morada::find($socio->morada_id);
         return view('painel.showSocio')->with(['socio' => $socio, 'morada' => $morada, 'cotas' => $cotas, 'proxima_cota' => $proxima_cota]);
@@ -351,13 +345,26 @@ class SocioController extends Controller
         return redirect(route('showSocio', $socio));
     }
 
-    public function atualizarCotas(Request $request, Socio $socio) {
+    public function pagarCota(Request $request, Socio $socio) {
 
         $this->validate($request, [
-            'cota_id' => 'numeric|required'
+            'cota_id' => 'numeric|required',
+            'data' => 'date|required',
+            'montante' => 'numeric|required',
         ]);
 
         $cota_id = $request->input('cota_id');
+        $data = $request->input('data');
+        $montante = $request->input('montante');
+
+        $proxima_cota = $socio->proximaCota();
+
+        //verificar se a cota é valida
+        if ($proxima_cota->id != $cota_id) {
+            Session::flash('mensagem-erro', 'Cota invalida.');
+        }
+
+        $user = Auth::user();
 
         $cota = ListaCotas::find($cota_id);
         if ($cota == null) {
@@ -365,9 +372,72 @@ class SocioController extends Controller
             return back();
         }
 
+        //cotas que o socio ja pagou, pode ser 0
+        $cotasSocio = $socio->getCotas();
+
+        //fazer o pagamento
+        $pagamento = Payment::make('cash', 'Pagamento de cota do socio numero ' . $socio->numero, $montante);
+
+
+        //Avisar caso o pagamento
+        if ($montante <= 0.0)
+            Log::warning('Foi feito um pagamento de cotas com o montante de ' . $montante .' Euros!');
+
+        $cotaPaga = Cota::create([
+            'cota_id' => $cota_id,
+            'socio_id' => $socio->id,
+            'pagamento_id' => $pagamento->id,
+            'data' => $data,
+        ]);
+
+        if($socio->estado == 0) {
+            $socio->estado = 1;
+            $socio->save();
+        }
+
+        Log::info($user->nome . ' ' . $user->apelido . ' (' . $user->id . ') marcou a ' . $cota->nome . ' como paga ao socio numero ' . $socio->numero);
+
         Session::flash('mensagem-sucesso', 'Cota atualizada com sucesso');
         return redirect()->back();
 
+    }
+
+    /**
+     * Remove a ultima cota do socio
+    */
+    public function removerCota(Request $request, Socio $socio) {
+
+        $cotas = $socio->getCotas();
+        $user = Auth::user();
+
+        if ($cotas->count() < 1) {
+            Session::flash('mensagem-erro', 'Não existe nenhuma cota para remover.');
+            back();
+        }
+
+        $cotaApagar = $cotas->last();
+        $nomeCota = $cotaApagar->nome;
+
+        Log::info($user->nome . ' ' . $user->apelido . ' (' . $user->id . ') eliminou a ' . $nomeCota . ' ao socio número ' . $socio->numero);
+
+        $pagamento = Payment::find($cotaApagar->pagamento_id);
+        $cotaApagar->delete();
+        $pagamento->deleted = true;
+        $pagamento->save();
+
+        Session::flash('mensagem-sucesso', 'Cota removida com sucesso');
+        return redirect()->back();
+    }
+
+    public function sociosAtrasados(Request $request) {
+
+        $socios = Socio::where('estado', 1);
+
+        foreach ($socios as $s) {
+
+        }
+
+        return view('painel.sociosAtrasados');
     }
 
     /**

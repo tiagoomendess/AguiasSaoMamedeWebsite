@@ -22,7 +22,10 @@ Route::group(['prefix' => 'painel', 'middleware' => 'admin'], function () {
         return view('painel.inicio');
     })->name('painel');
 
+    //Rotas dos sócios
     Route::get('/socio/{socio}/show', 'Resources\SocioController@show')->name('showSocio');
+    Route::post('/socio/{socio}/cota/pagar', 'Resources\SocioController@pagarCota')->name('pagarCota');
+    Route::post('/socio/{socio}/cota/remover', 'Resources\SocioController@removerCota')->name('removerCota');
     Route::get('/socios', 'Resources\SocioController@showSocios')->name('socios');
     Route::post('/socios', 'Resources\SocioController@showSocios')->name('socios'); //para procurar nomes especificos
     Route::get('/socios/atrasados', 'Resources\SocioController@sociosAtrasados')->name('sociosAtrasados');
@@ -32,6 +35,7 @@ Route::group(['prefix' => 'painel', 'middleware' => 'admin'], function () {
     Route::post('/socio/{socio}/update', 'Resources\SocioController@update')->name('updateSocio');
     Route::get('/socio/{socio}/destroy', 'Resources\SocioController@destroy')->name('destroySocio');
 
+    //rotas dos utilizadores
     Route::get('/utilizadores', 'Resources\UserController@showUtilizadores')->name('showUtilizadores');
     Route::post('/utilizadores', 'Resources\UserController@showUtilizadores')->name('showUtilizadoresProcura');
     Route::get('/utilizador/{user}/edit', 'Resources\UserController@edit')->name('editUtilizador');
@@ -40,6 +44,7 @@ Route::group(['prefix' => 'painel', 'middleware' => 'admin'], function () {
     Route::post('/utilizador/ban', 'Resources\UserController@ban')->name('banUser');
     Route::post('/utilizador/unban', 'Resources\UserController@unban')->name('unbanUser');
 
+    //Definições
     Route::get('/definicoes', 'Resources\UserController@showUtilizadores')->name('showDefinicoes');
 
 });
