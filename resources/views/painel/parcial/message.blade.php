@@ -19,7 +19,7 @@
         <div class="divider"></div>
 
         <div class="modal-footer">
-            <a href="" class="modal-action modal-close waves-effect waves-green btn-flat">Ok</a>
+            <a class="modal-action modal-close waves-effect waves-green btn-flat">Ok</a>
         </div>
 
     </div>

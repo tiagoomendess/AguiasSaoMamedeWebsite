@@ -11,4 +11,9 @@
                 draggable: true // Choose whether you can drag to open on touch screens
             }
     );
+
+    $(document).ready(function(){
+        // the "href" attribute of the modal trigger must specify the modal ID that wants to be triggered
+        $('#modal_logout').modal();
+    });
 </script>

@@ -8,6 +8,7 @@ use App\Payment;
 use App\Socio;
 use Carbon\Carbon;
 use Faker\Provider\cs_CZ\DateTime;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Morada;
@@ -429,15 +430,29 @@ class SocioController extends Controller
         return redirect()->back();
     }
 
+
+    /**
+     * Mostra todos os socios com cotas em atraso
+    */
     public function sociosAtrasados(Request $request) {
 
-        $socios = Socio::where('estado', 1);
+        $socios = Socio::where('estado', 1)->paginate(15);
+        $sociosAtrasados = new Collection();
 
-        foreach ($socios as $s) {
+        foreach ($socios as $socio) {
 
+            $cotas = $socio->getCotas();
+
+            if ($cotas->count() == 0) {
+                $sociosAtrasados->add($socio);
+            } else {
+                if (Carbon::parse(ListaCotas::find($cotas->last()->cota_id)->data_fim)->year < Carbon::now()->year) {
+                    $sociosAtrasados->add($socio);
+                }
+            }
         }
 
-        return view('painel.sociosAtrasados');
+        return view('painel.sociosAtrasados', ['socios' => $sociosAtrasados]);
     }
 
     /**
